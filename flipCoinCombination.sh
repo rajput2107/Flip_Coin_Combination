@@ -3,16 +3,27 @@
 declare -A tossesCount
 for i in {1..20}
 do
-	flip=$(( RANDOM%2 ))
+	flip1=$(( RANDOM%2 ))
+	flip2=$(( RANDOM%2 ))
 
-	if [ $flip -eq 0 ]
+	if [ $flip1 -eq 0 ] && [ $flip2 -eq 0 ]
 	then
-		(( tossesCount["HEAD"]++ ))
+		(( tossesCount["HH"]++ ))
+
+	elif [ $flip1 -eq 0 ] && [ $flip2 -eq 1 ]
+	then
+		(( tossesCount["HT"]++ ))
+
+	elif [ $flip1 -eq 1 ] && [ $flip2 -eq 0 ]
+	then
+		(( tossesCount["TH"]++ ))
 	else
-		(( tossesCount["TAIL"]++ ))
+		(( tossesCount["TT"]++ ))
 	fi
 done
 
-echo "Head Percentage : " `echo ${tossesCount["HEAD"]} | awk '{print$1/20*100}'`
-echo "Head Percentage : " `echo ${tossesCount["TAIL"]} | awk '{print$1/20*100}'`
+echo "HH Percentage : " `echo ${tossesCount["HH"]} | awk '{print$1/20*100}'`
+echo "TT Percentage : " `echo ${tossesCount["TT"]} | awk '{print$1/20*100}'`
+echo "HT Percentage : " `echo ${tossesCount["HT"]} | awk '{print$1/20*100}'`
+echo "TH Percentage : " `echo ${tossesCount["TH"]} | awk '{print$1/20*100}'`
 
