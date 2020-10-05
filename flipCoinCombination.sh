@@ -1,5 +1,5 @@
 #! /bin/bash
-
+# //flip coin
 declare -A tossesCount3
 declare -A tossesCount2
 declare -A tossesCount
